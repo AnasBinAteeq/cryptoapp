@@ -1,10 +1,21 @@
 import logo from './logo.svg';
+import {Routes, Route, Link} from 'react-router-dom';
+import { Layout, Typography, Space } from 'antd';
+import {NavBar} from "./components";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <h1>Cryptoverse</h1>
+      <div className='navbar'>
+        <NavBar/>
+      </div>
+      <div className='main'>
+
+      </div>
+      <div className='footer'>
+
+      </div>
     </div>
   );
 }
