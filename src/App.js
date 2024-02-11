@@ -1,14 +1,15 @@
 import logo from './logo.svg';
-import {Routes, Route, Link} from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Layout, Typography, Space } from 'antd';
-import {NavBar, Homepage, Exchanges, Cryptocurrencies, CryptoDetails, News} from "./components";
+import { NavBar, Homepage, Exchanges, Cryptocurrencies, CryptoDetails, News } from "./components";
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
+      
       <div className='navbar'>
-        <NavBar/>
+        <NavBar />
       </div>
       <div className='main'>
         <Layout>
@@ -22,19 +23,19 @@ function App() {
             </Routes>
           </div>
         </Layout>
-      
-      <div className='footer'>
-        <Typography.Title level={5} style={{color:'white', textAlign:'center'}}>
-          Cryptoverse <br/>
-          All Rights Reserved
-        </Typography.Title>
-        <Space>
-          <Link to="/">Home</Link>
-          <Link to="/exchanges">Exchanges</Link>
-          <Link to="/cryptocurrencies">Cryptocurrencies</Link>
-          <Link to="/news">News</Link>
-        </Space>
-      </div>
+
+        <div className='footer'>
+          <Typography.Title level={5} style={{ color: 'white', textAlign: 'center' }}>
+            Cryptoverse <br />
+            All Rights Reserved
+          </Typography.Title>
+          <Space>
+            <Link to="/">Home</Link>
+            <Link to="/exchanges">Exchanges</Link>
+            <Link to="/cryptocurrencies">Cryptocurrencies</Link>
+            <Link to="/news">News</Link>
+          </Space>
+        </div>
       </div>
     </div>
   );
