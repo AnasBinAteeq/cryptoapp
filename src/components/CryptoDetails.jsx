@@ -14,7 +14,12 @@ import {
   NumberOutlined,
   ThunderboltOutlined,
 } from "@ant-design/icons";
-import { useGetCryptoDetailsQuery } from "../services/cryptoApi";
+import {
+  useGetCryptoDetailsQuery,
+  useGetCryptoHistoryQuery,
+} from "../services/cryptoApi";
+import LineChart from "./LineChart";
+
 const { Text, Title } = Typography;
 const { Option } = Select;
 
@@ -22,8 +27,15 @@ const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+  const { data: coinHistory } = useGetCryptoHistoryQuery({
+    coinId,
+    timePeriod,
+  });
+
+  if (isFetching) return "Loading...";
   const cryptoDetails = data?.data?.coin;
-  console.log(cryptoDetails);
+  console.log(timePeriod);
+  console.log(coinHistory);
 
   const time = ["3h", "24h", "7d", "30d", "3m", "1y", "3y", "5y"];
 
@@ -95,7 +107,6 @@ const CryptoDetails = () => {
     },
   ];
 
-  if (isFetching) return "Loading...";
   return (
     <>
       <Col className="coin-detail-container">
@@ -119,6 +130,11 @@ const CryptoDetails = () => {
             <Option key={date}>{date}</Option>
           ))}
         </Select>
+        <LineChart
+          coinHistory={coinHistory}
+          currentPrice={millify(cryptoDetails?.price)}
+          coinName={cryptoDetails.name}
+        />
         <Col className="stats-container">
           <Col className="coin-value-statistics">
             <Col className="coin-value-statistics-heading">
@@ -163,9 +179,9 @@ const CryptoDetails = () => {
         <Col className="coin-desc-link">
           <Row className="coin-desc">
             <Title level={3} className="coin-details-heading">
-              What is {cryptoDetails.name}?
+              What is {cryptoDetails.name} ?
+              <p>{HTMLReactParser(cryptoDetails.description)}</p>
             </Title>
-            {HTMLReactParser(cryptoDetails.description)}
           </Row>
           <Col className="coin-links">
             <Title level={3} className="coin-details-heading">
