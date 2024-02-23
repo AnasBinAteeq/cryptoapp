@@ -3,6 +3,7 @@ import { Select, Typography, Row, Col, Card, Avatar } from "antd";
 import moment from "moment";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
 import { useGetCryptosQuery } from "../services/cryptoApi";
+import Loader from "./Loader";
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -13,8 +14,8 @@ const News = ({ simplified }) => {
     const [newsCategory, setNewsCategory] = useState("Cryptocurrency")
     const { data: cryptoNews, isFetching } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 10 })
     const { data: cryptos } = useGetCryptosQuery(100)
+    if (isFetching) return <Loader/>
 
-    if (isFetching) return 'Loading...'
     return (
         <>
             {!simplified && (
